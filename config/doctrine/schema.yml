@@ -1,0 +1,37 @@
+# config/doctrine/schema.yml
+---
+efipp3cliente:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(255), notnull: true }
+    dni: { type: integer(20)}
+    domicilio: {type: string(255)}
+    
+efipp3empleado:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(255), notnull: true }
+    dni: { type: integer(20) }
+    
+efipp3automovil:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(255), notnull: true }
+    modelo: { type: string(225) }
+  relations:
+    efipp3cliente: { onDelete: CASCADE, local: cliente_id, foreign: id, foreignAlias: efipp3automovil } 
+ 
+efipp3reparacion:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: {type: string(255) }
+    costo: {type: integer(7) }
+
+ 
+efipp3turno:
+  actAs: {Timestample: ~ }
+  columns:
+    fechahora: {type: datetime }
+  relations:
+    efipp3cliente:  { onDelete: CASCADE, local: cliente_id, foreign: id }
+    efipp3reparacion: { onDelete: CASCADE, local: reparacion_id, foreign: id }   
